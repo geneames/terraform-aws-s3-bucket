@@ -1,5 +1,5 @@
 module "default_label" {
-  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.3"
+  source     = "git::https://github.com/geneames/terraform-null-label.git?ref=tags/0.11.1"
   enabled    = "${var.enabled}"
   namespace  = "${var.namespace}"
   stage      = "${var.stage}"
@@ -36,7 +36,7 @@ resource "aws_s3_bucket" "default" {
 }
 
 module "s3_user" {
-  source       = "git::https://github.com/cloudposse/terraform-aws-iam-s3-user.git?ref=tags/0.3.1"
+  source       = "git::https://github.com/geneames/terraform-aws-iam-s3-user.git?ref=tags/0.11.14.1"
   namespace    = "${var.namespace}"
   stage        = "${var.stage}"
   name         = "${var.name}"
@@ -88,7 +88,7 @@ data "aws_iam_policy_document" "bucket_policy" {
 }
 
 module "aggregated_policy" {
-  source           = "git::https://github.com/cloudposse/terraform-aws-iam-policy-document-aggregator.git?ref=tags/0.1.2"
+  source           = "git::https://github.com/geneames/terraform-aws-iam-policy-document-aggregator.git?ref=tags/0.11.14"
   source_documents = "${flatten(list(data.aws_iam_policy_document.bucket_policy.*.json, var.additional_bucket_policies))}"
 }
 
